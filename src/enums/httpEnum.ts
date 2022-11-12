@@ -7,6 +7,7 @@ export enum ResultEnum {
   TIMEOUT = 401,
   TOKEN_ERROR = 403,
   TYPE = 'success',
+  SYSTEM_ERROR = 500,
 }
 
 /**

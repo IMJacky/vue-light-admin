@@ -75,6 +75,9 @@ const transform: AxiosTransform = {
         userStoreToken.setToken(undefined);
         userStoreToken.logout(true);
         break;
+      case ResultEnum.SYSTEM_ERROR:
+        timeoutMsg = t('sys.api.errMsg500');
+        break;
       default:
         if (msg) {
           timeoutMsg = msg;
@@ -85,7 +88,7 @@ const transform: AxiosTransform = {
     // errorMessageMode='none' 一般是调用时明确表示不希望自动弹出错误提示
     if (options.errorMessageMode === 'modal') {
       createErrorModal({ title: t('sys.api.errorTip'), content: timeoutMsg });
-    } else if (options.errorMessageMode === 'message') {
+    } else if (options.errorMessageMode === 'message' || options.errorMessageMode === 'none') {
       createMessage.error(timeoutMsg);
     }
 
@@ -183,7 +186,6 @@ const transform: AxiosTransform = {
     if (axios.isCancel(error)) {
       return Promise.reject(error);
     }
-
     try {
       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
         errMessage = t('sys.api.apiTimeoutMessage');
