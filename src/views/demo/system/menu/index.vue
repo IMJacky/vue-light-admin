@@ -33,7 +33,7 @@
   import { defineComponent, nextTick } from 'vue';
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { getMenuList } from '/@/api/demo/system';
+  import { getMenuList, deleteMenu } from '/@/api/demo/system';
 
   import { useDrawer } from '/@/components/Drawer';
   import MenuDrawer from './MenuDrawer.vue';
@@ -41,7 +41,7 @@
   import { columns, searchFormSchema } from './menu.data';
 
   export default defineComponent({
-    name: 'MenuManagement',
+    name: '6',
     components: { BasicTable, MenuDrawer, TableAction },
     setup() {
       const [registerDrawer, { openDrawer }] = useDrawer();
@@ -85,6 +85,9 @@
 
       function handleDelete(record: Recordable) {
         console.log(record);
+        deleteMenu(record.id).then(() => {
+          reload();
+        });
       }
 
       function handleSuccess() {

@@ -4,6 +4,7 @@ export default {
     errorTip: 'Error Tip',
     errorMessage: 'The operation failed, the system is abnormal!',
     timeoutMessage: 'Login timed out, please log in again!',
+    loginErrorMessage: 'account or password error!',
     apiTimeoutMessage: 'The interface request timed out, please refresh the page and try again!',
     apiRequestFailed: 'The interface request failed, please try again later!',
     networkException: 'network anomaly',

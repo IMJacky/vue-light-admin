@@ -101,7 +101,11 @@ export const useUserStore = defineStore({
       }
     },
     async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
-      if (!this.getToken) return null;
+      const { t } = useI18n();
+      if (!this.getToken) {
+        throw new Error(t('sys.api.loginErrorMessage'));
+        // return null;
+      }
       // get user info
       const userInfo = await this.getUserInfoAction();
 
