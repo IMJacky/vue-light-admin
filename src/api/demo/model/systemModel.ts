@@ -22,6 +22,11 @@ export type MenuParams = {
   status?: string;
 };
 
+export type ChangePasswordParams = {
+  passwordOld?: string;
+  passwordNew?: string;
+};
+
 export interface AccountListItem {
   id: string;
   account: string;

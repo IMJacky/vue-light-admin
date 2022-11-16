@@ -9,6 +9,7 @@ import {
   AccountListGetResultModel,
   RolePageListGetResultModel,
   RoleListGetResultModel,
+  ChangePasswordParams,
 } from './model/systemModel';
 import { defHttp } from '/@/utils/http/axios';
 
@@ -19,6 +20,7 @@ enum Api {
   setRoleStatus = '/system/setRoleStatus',
   MenuList = '/menu/menuList',
   MenuEdit = '/menu/edit',
+  ChangePassword = '/auth/passwordChange',
   MenuDelete = '/menu/',
   RolePageList = '/system/getRoleListByPage',
   GetAllRoleList = '/system/getAllRoleList',
@@ -50,3 +52,6 @@ export const setRoleStatus = (id: number, status: string) =>
 
 export const isAccountExist = (account: string) =>
   defHttp.post({ url: Api.IsAccountExist, params: { account } }, { errorMessageMode: 'none' });
+
+export const changePassword = (params?: ChangePasswordParams) =>
+  defHttp.post<Boolean>({ url: Api.ChangePassword, params });
