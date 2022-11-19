@@ -17,11 +17,6 @@ export const columns: BasicColumn[] = [
     width: 180,
   },
   {
-    title: '排序',
-    dataIndex: 'orderNo',
-    width: 50,
-  },
-  {
     title: '状态',
     dataIndex: 'status',
     width: 120,
@@ -30,13 +25,13 @@ export const columns: BasicColumn[] = [
         record.pendingStatus = false;
       }
       return h(Switch, {
-        checked: record.status === '1',
+        checked: record.status === 0,
         checkedChildren: '已启用',
         unCheckedChildren: '已禁用',
         loading: record.pendingStatus,
         onChange(checked: boolean) {
           record.pendingStatus = true;
-          const newStatus = checked ? '1' : '0';
+          const newStatus = checked ? 0 : 1;
           const { createMessage } = useMessage();
           setRoleStatus(record.id, newStatus)
             .then(() => {
@@ -55,18 +50,18 @@ export const columns: BasicColumn[] = [
   },
   {
     title: '创建时间',
-    dataIndex: 'createTime',
+    dataIndex: 'createDate',
     width: 180,
   },
   {
     title: '备注',
-    dataIndex: 'remark',
+    dataIndex: 'description',
   },
 ];
 
 export const searchFormSchema: FormSchema[] = [
   {
-    field: 'roleNme',
+    field: 'roleName',
     label: '角色名称',
     component: 'Input',
     colProps: { span: 8 },
@@ -77,8 +72,8 @@ export const searchFormSchema: FormSchema[] = [
     component: 'Select',
     componentProps: {
       options: [
-        { label: '启用', value: '0' },
-        { label: '停用', value: '1' },
+        { label: '启用', value: 0 },
+        { label: '停用', value: 1 },
       ],
     },
     colProps: { span: 8 },
@@ -86,6 +81,13 @@ export const searchFormSchema: FormSchema[] = [
 ];
 
 export const formSchema: FormSchema[] = [
+  {
+    field: 'id',
+    label: 'Id',
+    component: 'InputNumber',
+    show: false,
+    defaultValue: 0,
+  },
   {
     field: 'roleName',
     label: '角色名称',
@@ -102,17 +104,17 @@ export const formSchema: FormSchema[] = [
     field: 'status',
     label: '状态',
     component: 'RadioButtonGroup',
-    defaultValue: '0',
+    defaultValue: 0,
     componentProps: {
       options: [
-        { label: '启用', value: '0' },
-        { label: '停用', value: '1' },
+        { label: '启用', value: 0 },
+        { label: '停用', value: 1 },
       ],
     },
   },
   {
     label: '备注',
-    field: 'remark',
+    field: 'description',
     component: 'InputTextArea',
   },
   {

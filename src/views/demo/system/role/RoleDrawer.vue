@@ -14,7 +14,8 @@
           :treeData="treeData"
           :fieldNames="{ title: 'menuName', key: 'id' }"
           checkable
-          toolbar
+          defaultExpandAll
+          checkStrictly
           title="菜单分配"
         />
       </template>
@@ -28,7 +29,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { BasicTree, TreeItem } from '/@/components/Tree';
 
-  import { getMenuList } from '/@/api/demo/system';
+  import { getMenuList, saveRole } from '/@/api/demo/system';
 
   export default defineComponent({
     name: 'RoleDrawer',
@@ -69,8 +70,10 @@
           setDrawerProps({ confirmLoading: true });
           // TODO custom api
           console.log(values);
-          closeDrawer();
-          emit('success');
+          saveRole(values).then(() => {
+            closeDrawer();
+            emit('success');
+          });
         } finally {
           setDrawerProps({ confirmLoading: false });
         }

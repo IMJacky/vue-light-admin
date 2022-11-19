@@ -61,8 +61,8 @@ export interface RoleListItem {
   roleName: string;
   roleValue: string;
   status: number;
-  orderNo: string;
-  createTime: string;
+  description: string;
+  createDate: string;
 }
 
 /**
